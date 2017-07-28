@@ -29,7 +29,7 @@ const MessageBubble = ({ id, outOrIn, timestamp, body }) => {
                 />
             );
         case 'divider':
-            return <Divider style={{ backgroundColor: 'blue' }} />
+            return <Divider style={dividerStyle} />
         default:
             console.log(type);
     }
@@ -37,13 +37,18 @@ const MessageBubble = ({ id, outOrIn, timestamp, body }) => {
 
 const styles = {
     textStyle: {
-        marginTop: 20,
+        alignItems:'center',
+        marginTop: 10,
+        marginLeft:30,
+        marginRight:30,        
         minHeight: 40,
         fontSize: 22
     },
     dividerStyle: {
-        marginTop:20,
-        
+        backgroundColor: '#999',
+        height:2,
+        marginTop:40,
+
     }
 };
 
