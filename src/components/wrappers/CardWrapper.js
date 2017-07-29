@@ -11,7 +11,7 @@ const CardWrapper = ({ thumbnail_image, foodName, tags, suggestion, rating, pric
     const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, ratingSty, txtCardContainer } = styles;
 
     return (
-        <Card containerStyle={{ flex: 1}} wrapperStyle={{ flex: 1, flexDirection: 'column' }}>
+        <Card containerStyle={{ flex: 1, padding: 0}} wrapperStyle={{ flex: 1, flexDirection: 'column' }}>
             <View flex={4} flexDirection={'row'}>
                 <View style={thumbnailContainerStyle}>
                     <Image
@@ -20,7 +20,7 @@ const CardWrapper = ({ thumbnail_image, foodName, tags, suggestion, rating, pric
                         />
                 </View>
                 <View style={contentContainerStyle}>
-                    <Text>{foodName}</Text>
+                    <Text style={{fontWeight:'bold'}}>{foodName}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                         <Rating
                             imageSize={20}
@@ -28,17 +28,17 @@ const CardWrapper = ({ thumbnail_image, foodName, tags, suggestion, rating, pric
                             startingValue={rating}
                             style={ratingSty}
                             />
-                        <Text>{`${distance} mi`}</Text>
+                        <Text style={{color:'grey'}}>{`${distance} mi`}</Text>
                     </View>
-                    <Text>{highlights.toString()}</Text>
+                    <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
                 </View>
             </View>
             <View flex={1} flexDirection={'row'} alignItems={'center'}>
                 <View style={txtCardContainer}>
-                    <Text>{suggestion}</Text>
+                    <Text style={{color:'white'}}>{suggestion}</Text>
                 </View>
                 <View style={txtCardContainer}>
-                    <Text>{`$${price}`}</Text>
+                    <Text style={{color:'white'}}>{`$${price}`}</Text>
                 </View>
             </View>
         </Card>
@@ -54,6 +54,7 @@ const styles = {
         flex: 1,
         height: '100%',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     bkgColor: {
         backgroundColor: '#bfa',
