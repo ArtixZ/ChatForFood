@@ -37,6 +37,8 @@ export default class extends Component {
             <View>
                 <Swiper
                     showsPagination={false}
+                    loadMinimal
+                    loadMinimalSize={1}
                     style={styles.wrapper}
                     height={165}
                     loop={false}
@@ -44,19 +46,18 @@ export default class extends Component {
                     {
                         cards.map((card, i) => {
                             const { pic, name, restaurantName, tags, distance, highlights, suggestion, rating, price } = card;
-                            return (
-                                <CardWrapper
-                                    key={i}
-                                    thumbnail_image={pic}
-                                    foodName={name}
-                                    restaurantName={restaurantName}
-                                    distance={distance}
-                                    highlights={highlights}
-                                    tags={tags}
-                                    suggestion={suggestion}
-                                    rating={rating}
-                                    price={price}
-                                />)
+                            return (<CardWrapper
+                                        key={i}
+                                        thumbnail_image={pic}
+                                        foodName={name}
+                                        restaurantName={restaurantName}
+                                        distance={distance}
+                                        highlights={highlights}
+                                        tags={tags}
+                                        suggestion={suggestion}
+                                        rating={rating}
+                                        price={price}
+                                    />)
                             })
                     }
                 </Swiper>
