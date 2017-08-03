@@ -2,11 +2,12 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { Card, ListItem, Button } from 'react-native-elements'
 import { Rating } from 'react-native-elements';
+import numeral from 'numeral';
 
 import { CardHorizontal, CardSection } from '../common';
 
 
-const CardWrapper = ({ thumbnail_image, foodName, tags, suggestion, rating, price, highlights, distance }) => {
+const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggestion, rating, price, highlights, distance }) => {
 
     const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, ratingSty, txtCardContainer } = styles;
 
@@ -16,11 +17,11 @@ const CardWrapper = ({ thumbnail_image, foodName, tags, suggestion, rating, pric
                 <View style={thumbnailContainerStyle}>
                     <Image
                         style={thumbnailStyle}
-                        source={{ uri: thumbnail_image }}
+                        source={thumbnail_image}
                         />
                 </View>
                 <View style={contentContainerStyle}>
-                    <Text style={{fontWeight:'bold'}}>{foodName}</Text>
+                    <Text style={{fontWeight:'bold'}}>{restaurantName}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                         <Rating
                             imageSize={20}
@@ -28,14 +29,14 @@ const CardWrapper = ({ thumbnail_image, foodName, tags, suggestion, rating, pric
                             startingValue={rating}
                             style={ratingSty}
                             />
-                        <Text style={{color:'grey'}}>{`${distance} mi`}</Text>
+                        <Text style={{color:'grey'}}>{`${numeral(distance).format('0.0')} mi`}</Text>
                     </View>
                     <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
                 </View>
             </View>
             <View flex={1} flexDirection={'row'} alignItems={'center'}>
                 <View style={txtCardContainer}>
-                    <Text style={{color:'white'}}>{suggestion}</Text>
+                    <Text style={{color:'white'}}>{foodName}</Text>
                 </View>
                 <View style={txtCardContainer}>
                     <Text style={{color:'white'}}>{`$${price}`}</Text>
