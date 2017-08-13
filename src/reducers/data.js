@@ -1,4 +1,31 @@
-export default data=[
+
+export const IMAGES = {
+    'antipastosalad': require('./food_photos/antipastosalad/1.jpg'),
+    'blackbeanburger': require('./food_photos/blackbeanburger/1.jpg'),
+    'caesarsalad': require('./food_photos/caesarsalad/1.jpg'),
+    'frenchonionsoup': require('./food_photos/frenchonionsoup/1.jpg'),
+    'greekchickenwrap': require('./food_photos/greekchickenwrap/1.jpg'),
+    'greencurryfriedrice': require('./food_photos/greencurryfriedrice/1.jpg'),
+    'grilledchickencaesarwrap': require('./food_photos/grilledchickencaesarwrap/1.jpg'),
+    'grilledsalmon': require('./food_photos/grilledsalmon/1.jpg'),
+    'housesalad': require('./food_photos/housesalad/1.jpg'),
+    'italianbeefsandwich': require('./food_photos/italianbeefsandwich/1.jpg'),
+    'italiancalzone': require('./food_photos/italiancalzone/1.jpg'),
+    'lentilsoup': require('./food_photos/lentilsoup/1.jpg'),
+    'papayasalad': require('./food_photos/papayasalad/1.jpg'),
+    'peachandstrawberrywithsoymilksmoothie': require('./food_photos/peachandstrawberrywithsoymilksmoothie/1.jpg'),
+    'ranchfriedchickensalad': require('./food_photos/ranchfriedchickensalad/1.jpg'),
+    'sesamegreenbeans': require('./food_photos/sesamegreenbeans/1.jpg'),
+    'steamedbroccoli': require('./food_photos/steamedbroccoli/1.jpg'),
+    'steamedchickenwithvegetables': require('./food_photos/steamedchickenwithvegetables/1.jpg'),
+    'sweetandsourshrimp': require('./food_photos/sweetandsourshrimp/1.jpg'),
+    'sweetheartroll': require('./food_photos/sweetheartroll/1.jpg'),
+    'sweetpotatotempuraroll': require('./food_photos/sweetpotatotempuraroll/1.jpg'),
+    'tunasalad': require('./food_photos/tunasalad/1.jpg'),
+    'vegetariandelight': require('./food_photos/vegetariandelight/1.jpg'),
+}
+
+export const data=[
     {
         "food_category": "Salads",
         "food_detail": "",
@@ -9431,3 +9458,4 @@ export default data=[
         ]
     }
 ];
+

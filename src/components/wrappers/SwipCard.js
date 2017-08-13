@@ -37,8 +37,6 @@ export default class extends Component {
             <View>
                 <Swiper
                     showsPagination={false}
-                    loadMinimal
-                    loadMinimalSize={1}
                     style={styles.wrapper}
                     height={165}
                     loop={false}

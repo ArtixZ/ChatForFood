@@ -17,6 +17,7 @@ import { send, subscribe } from 'react-native-training-chat-server';
 import Header from './Header';
 import { MessageBubble } from './common';
 import { messageSent, getResponse } from '../actions';
+import PreloadHOC from '../reducers/PreloadHOC';
 
 const TITLE = 'ChatForFood';
 
@@ -29,9 +30,6 @@ class ChatUI extends React.Component {
     this.sendMessage = this.sendMessage.bind(this);
   }
 
-  componentWillMount() {
-    
-  }
   sendMessage() {
     if (this.state.typing) {
         this.props.messageSent(this.state.typing);        
@@ -132,4 +130,4 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-export default connect(mapStateToProps, {messageSent, getResponse})(ChatUI);
+export default connect(mapStateToProps, {messageSent, getResponse})(PreloadHOC(ChatUI));

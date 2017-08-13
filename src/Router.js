@@ -12,8 +12,6 @@ import ChatUI from './components/ChatUI';
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
-      
-
       <Scene key="main">
         <Scene
           onRight={() => Actions.chatRoom()}
