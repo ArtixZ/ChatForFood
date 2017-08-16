@@ -42,7 +42,7 @@ class ChatUI extends React.Component {
   }
   onCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
-      base64,
+      base64: true,
       allowsEditing: true,
       aspect: [4, 3],
     });
