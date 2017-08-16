@@ -13,11 +13,14 @@ import {
 import { connect } from 'react-redux';
 import ReversedFlatList from 'react-native-reversed-flat-list';
 import { send, subscribe } from 'react-native-training-chat-server';
+import { Icon } from 'react-native-elements';
+import { ImagePicker } from 'expo';
+
 
 import Header from './Header';
 import { MessageBubble } from './common';
 import { messageSent, getResponse } from '../actions';
-import PreloadHOC from '../reducers/PreloadHOC';
+// import PreloadHOC from '../reducers/PreloadHOC';
 
 const TITLE = 'ChatForFood';
 
@@ -37,6 +40,19 @@ class ChatUI extends React.Component {
         this.props.getResponse(this.state.typing);
     }
   }
+  onCamera = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      base64,
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+
   renderRow(rowData) {
         const { msg_id, timestamp, direction, body } = rowData.item;
         return (
@@ -64,11 +80,15 @@ class ChatUI extends React.Component {
         <View style={{height: 10}} />
         <KeyboardAvoidingView behavior="padding">
           <View style={styles.footer}>
+            <Icon
+              onPress={this.onCamera}
+              iconStyle={styles.camera}
+              name='camera-alt' />           
             <TextInput
               value={this.state.typing}
               style={styles.input}
               underlineColorAndroid="transparent"
-              placeholder="What to have"
+              placeholder="What to have..."
               onChangeText={text => this.setState({ typing: text })}
               />
             <TouchableOpacity onPress={this.sendMessage}>
@@ -112,8 +132,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#eee',
   },
+  camera: {
+    paddingHorizontal: 10
+  },
   input: {
-    paddingHorizontal: 20,
+    paddingRight: 20,
     fontSize: 18,
     flex: 1,
   },
@@ -130,4 +153,6 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-export default connect(mapStateToProps, {messageSent, getResponse})(PreloadHOC(ChatUI));
+// export default connect(mapStateToProps, {messageSent, getResponse})(PreloadHOC(ChatUI));
+export default connect(mapStateToProps, {messageSent, getResponse})((ChatUI));
+
