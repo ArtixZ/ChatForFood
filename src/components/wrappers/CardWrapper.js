@@ -7,7 +7,7 @@ import numeral from 'numeral';
 import { CardHorizontal, CardSection } from '../common';
 
 
-const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggestion, rating, price, highlights, distance }) => {
+const CardWrapper = ({ key, thumbnail_image, foodName, restaurantName, tags, suggestion, rating, price, highlights, distance }) => {
 
     const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, ratingSty, txtCardContainer } = styles;
 

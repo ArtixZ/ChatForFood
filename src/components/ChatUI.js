@@ -9,6 +9,8 @@ import {
   StatusBar,
   FlatList,
   Image,
+  LayoutAnimation,
+  UIManager,
 } from 'react-native';
 import { connect } from 'react-redux';
 import ReversedFlatList from 'react-native-reversed-flat-list';
@@ -32,6 +34,12 @@ class ChatUI extends React.Component {
     };
     this.sendMessage = this.sendMessage.bind(this);
   }
+
+  componentWillUpdate (nextProps, nextState) {
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    LayoutAnimation.spring();
+  }
+  
 
   sendMessage() {
     if (this.state.typing) {
