@@ -9,3 +9,4 @@ export * from './ChatBox';
 export * from './MessageList';
 export * from './MessageBubble';
 export * from './CardHorizontal';
+export * from './ReversedList';

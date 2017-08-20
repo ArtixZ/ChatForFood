@@ -13,26 +13,35 @@ import {
   UIManager,
 } from 'react-native';
 import { connect } from 'react-redux';
-import ReversedFlatList from 'react-native-reversed-flat-list';
 import { send, subscribe } from 'react-native-training-chat-server';
 import { Icon } from 'react-native-elements';
 import { ImagePicker } from 'expo';
 
 
 import Header from './Header';
-import { MessageBubble } from './common';
+import { MessageBubble, ReversedList } from './common';
 import { messageSent, getResponse } from '../actions';
 // import PreloadHOC from '../reducers/PreloadHOC';
 
 const TITLE = 'ChatForFood';
 
 class ChatUI extends React.Component {
+  static navigationOptions = {
+    title: 'ChatForFood',
+    headerTintColor: 'white',
+    headerStyle: {
+        backgroundColor: 'lightseagreen', 
+        elevation: null
+    },
+  }
+
   constructor(props){
     super(props);
     this.state = {
       typing: '',
     };
     this.sendMessage = this.sendMessage.bind(this);
+    this.renderRow = this.renderRow.bind(this);
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -63,12 +72,14 @@ class ChatUI extends React.Component {
 
   renderRow(rowData) {
         const { msg_id, timestamp, direction, body } = rowData.item;
+        const { navigation } = this.props;
         return (
             <MessageBubble
                 key={rowData.index}
                 outOrIn={direction}
                 timestamp={timestamp}
                 body={body}
+                navigation={navigation}
             />
              
         ); 
@@ -78,8 +89,7 @@ class ChatUI extends React.Component {
     const { messages } = this.props;
     return (
       <View style={styles.container}>
-        <Header title={TITLE} />
-        <ReversedFlatList
+        <ReversedList
           data={messages}
           renderItem={this.renderRow}
           keyboardShouldPersistTaps={'never'}
@@ -91,7 +101,7 @@ class ChatUI extends React.Component {
             <Icon
               onPress={this.onCamera}
               iconStyle={styles.camera}
-              name='camera-alt' />           
+              name='camera-alt' />
             <TextInput
               value={this.state.typing}
               style={styles.input}

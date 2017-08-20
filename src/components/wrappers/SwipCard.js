@@ -30,6 +30,12 @@ export default class extends Component {
         super(props)
         this.state = {}
     }
+
+    onCardPress(card) {
+        const {navigation} = this.props;
+        navigation.navigate('foodDetail', {foodInfo: card});
+    }
+
     render() {
         const {cards} = this.props;
 
@@ -55,6 +61,7 @@ export default class extends Component {
                                         suggestion={suggestion}
                                         rating={rating}
                                         price={price}
+                                        onCardPress={this.onCardPress.bind(this, card)}
                                     />)
                             })
                     }

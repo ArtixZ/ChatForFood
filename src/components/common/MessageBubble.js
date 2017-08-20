@@ -4,7 +4,7 @@ import SwipCard from '../wrappers/SwipCard';
 import { Text, Divider } from 'react-native-elements'
 
 
-const MessageBubble = ({ id, outOrIn, timestamp, body }) => {
+const MessageBubble = ({ id, outOrIn, timestamp, body, navigation }) => {
 
     const { textStyle, dividerStyle } = styles;
     const { type } = body;
@@ -25,7 +25,9 @@ const MessageBubble = ({ id, outOrIn, timestamp, body }) => {
             const { payload } = body;
             return (
                 <SwipCard
+                    key={id}
                     cards = {payload}
+                    navigation={navigation}
                 />
             );
         case 'divider':
