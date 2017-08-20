@@ -13,6 +13,7 @@ class ReversedList extends React.Component {
       data: [...props.data].reverse()
     };
   }
+  _keyExtractor = (item, index) => index;
 
   // when provided data array changes,
   // update the internal reversed copy
@@ -40,11 +41,11 @@ class ReversedList extends React.Component {
 
   // each row is flipped back to normal position
   renderItem = props => (
-    <View key={props.index} style={styles.flip}>
+    <View style={styles.flip}>
       {this.props.renderItem(props)}
     </View>
   );
-
+  
   render() {
     const { renderItem, data, ...props } = this.props;
     return (
@@ -54,6 +55,7 @@ class ReversedList extends React.Component {
         renderItem={this.renderItem}
         renderScrollComponent={this.renderScrollComponent}
         ref={ref => (this._listViewRef = ref)}
+        keyExtractor={this._keyExtractor}
       />
     );
   }
