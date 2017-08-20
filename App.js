@@ -3,10 +3,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 // import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
+import { StackNavigator } from 'react-navigation';
 
 import reducers from './src/reducers';
-// import Router from './src/Router';
+// import AppNavigator from './src/AppNavigator';
 import ChatUI from './src/components/ChatUI';
+import FoodDetail from './src/components/FoodDetail';
 
 class App extends Component {
   componentWillMount() {
@@ -24,10 +26,14 @@ class App extends Component {
 
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+    const MainNavigator = StackNavigator({
+      chatUI: {screen: ChatUI},
+      foodDetail: {screen: FoodDetail}
+    });
 
     return (
       <Provider store={store}>
-        <ChatUI />
+        <MainNavigator />
       </Provider>
     );
   }
