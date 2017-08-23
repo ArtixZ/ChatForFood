@@ -96,7 +96,7 @@ class ChatUI extends React.Component {
           keyboardDismissMode={'on-drag'}
           />
         <View style={{height: 10}} />
-        <KeyboardAvoidingView behavior="padding">
+        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={60}>
           <View style={styles.footer}>
             <Icon
               onPress={this.onCamera}
