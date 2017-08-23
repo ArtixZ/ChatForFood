@@ -3,6 +3,8 @@ import { View, Image, Text } from 'react-native';
 import { Rating } from 'react-native-elements';
 import numeral from 'numeral';
 
+import BarChart from './BarChart';
+
 class FoodDetail extends Component {
     static navigationOptions = ({navigation}) => ({
         title: navigation.state.params.foodInfo.name,
@@ -17,6 +19,8 @@ class FoodDetail extends Component {
 
     }
     render() {
+        const ingredients = {Calories: 19, Fat: 22, Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
+
         const { thumbnailStyle, thumbnailContainerStyle, contentContainerStyle, detailContainerSty, foodInfoSty, abstractSty, ingredientSty, actionSty } = styles;
         
         const { navigation } = this.props;
@@ -33,23 +37,27 @@ class FoodDetail extends Component {
                         />
                     </View>
                     <View style={contentContainerStyle}>
-                        <Text style={{fontWeight:'bold'}}>{restaurantName}</Text>
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
-                            <Rating
-                                imageSize={20}
-                                readonly
-                                startingValue={rating}
-                            />
-                            <Text style={{color:'grey'}}>{`${numeral(distance).format('0.0')} mi`}</Text>
+                            <Text style={{fontWeight:'bold'}}>{restaurantName}</Text>
                         </View>
+                        <Text style={{color:'grey'}}>{`${numeral(distance).format('0.0')} mi`}</Text>
+                        <Rating
+                            imageSize={20}
+                            readonly
+                            startingValue={rating}
+                        />
                         <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
                     </View>
                 </View>
 
                 <View style = {abstractSty}>
+                    <Text>Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of </Text>
                 </View>
 
                 <View style = {ingredientSty}>
+                    <BarChart
+                        ingredients = {ingredients}
+                    />
                 </View>
 
                 <View style = {actionSty}>
@@ -78,18 +86,21 @@ const styles = {
         flex: 1
     },
     thumbnailContainerStyle: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 10,
         marginRight: 10
     },
     thumbnailStyle: {
-        height: '100%',
+        height: 130,
+        width: 200
     },
     contentContainerStyle: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
 }
 
