@@ -40,12 +40,12 @@ class BarChart extends Component {
         const { Calories } = this.state;
         const { ingredients } = this.props;
         return(
-            <View>
+            <View style={{flex: 1}}>
                 
                 {Object.keys(ingredients).map( (ing, i) => 
-                    <View key={i}>
-                        <Text>{ing}</Text>
-                        <View>
+                    <View key={i} style={{flex: 1}}>
+                        <Text style={{flex: 1}}>{ing}</Text>
+                        <View style={{flex: 1}}>
                             <Animated.View style={[styles.bar, styles[ing], {width: this.state[ing]}]}/>
                         </View>
                     </View>

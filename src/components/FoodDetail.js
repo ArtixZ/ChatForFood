@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, Text } from 'react-native';
 import { Rating } from 'react-native-elements';
 import numeral from 'numeral';
+import { Button } from 'react-native-elements'
 
 import BarChart from './BarChart';
 
@@ -61,6 +62,12 @@ class FoodDetail extends Component {
                 </View>
 
                 <View style = {actionSty}>
+                    <Button
+                        large
+                        iconRight
+                        backgroundColor={'#159589'}
+                        icon={{name: 'local-cafe'}}
+                        title='HAVE IT' />
                 </View>
             </View>
         )
