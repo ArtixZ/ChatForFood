@@ -58,7 +58,7 @@ const styles = {
     bar: {
         alignSelf: 'flex-start',
         borderRadius: 5,
-        height: 8,
+        height: 10,
         marginRight: 5
     },
     Calories: {
