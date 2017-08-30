@@ -14,25 +14,29 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { send, subscribe } from 'react-native-training-chat-server';
-import { Icon } from 'react-native-elements';
+import { Icon, Header } from 'react-native-elements';
 import { ImagePicker } from 'expo';
 
 
-import Header from './Header';
+// import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
 import { messageSent, getResponse } from '../actions';
-// import PreloadHOC from '../reducers/PreloadHOC';
+// import PreloadHOC from './PreloadHOC';
 
 const TITLE = 'ChatForFood';
 
 class ChatUI extends React.Component {
   static navigationOptions = {
-    title: 'ChatForFood',
-    headerTintColor: 'white',
-    headerStyle: {
-        backgroundColor: 'lightseagreen', 
-        elevation: null
-    },
+    title: 'Olive',
+    header: ( {navigate} ) => {
+      return (
+        <Header
+          outerContainerStyles={{ backgroundColor: '#fff' }}
+          leftComponent={{ icon: 'menu', type: 'entypo', color: '#43496A' }}
+          centerComponent={{ text: 'Olive', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
+          rightComponent={{ icon: 'heart', type: 'entypo', color: '#43496A' }}
+        />)
+    }
   }
 
   constructor(props){
@@ -96,12 +100,14 @@ class ChatUI extends React.Component {
           keyboardDismissMode={'on-drag'}
           />
         <View style={{height: 10}} />
-        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={60}>
+        <KeyboardAvoidingView behavior="padding">
           <View style={styles.footer}>
             <Icon
+              type="entypo"
               onPress={this.onCamera}
+              color='#F98324'
               iconStyle={styles.camera}
-              name='camera-alt' />
+              name='camera' />
             <TextInput
               value={this.state.typing}
               style={styles.input}
@@ -160,7 +166,7 @@ const styles = StyleSheet.create({
   },
   send: {
     alignSelf: 'center',
-    color: 'lightseagreen',
+    color: '#F98324',
     fontSize: 16,
     fontWeight: 'bold',
     padding: 20,
