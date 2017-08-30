@@ -3,7 +3,8 @@ import {
     Text,
     View,
     Image,
-    Dimensions
+    Dimensions,
+    Platform
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import CardWrapper from './CardWrapper';
@@ -43,8 +44,8 @@ export default class extends Component {
             <View>
                 <Swiper
                     showsPagination={false}
-                    style={styles.wrapper}
-                    height={165}
+                    containerStyle={styles.wrapper}
+                    height={170}
                     loop={false}
                 >
                     {
@@ -73,6 +74,18 @@ export default class extends Component {
 
 const styles = {
     wrapper: {
+        marginBottom: 3,
+        ...Platform.select({
+            ios: {
+                shadowColor: 'rgba(0,0,0, .2)',
+                shadowOffset: { height: 3, width: 2 },
+                shadowOpacity: 3,
+                shadowRadius: 1,
+            },
+            android: {
+                elevation: 1,
+            },
+        }),
     },
 
     // slide: {
