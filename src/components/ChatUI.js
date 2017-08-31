@@ -27,12 +27,16 @@ const TITLE = 'ChatForFood';
 
 class ChatUI extends React.Component {
   static navigationOptions = {
-    title: 'Olive',
     header: ( {navigate} ) => {
       return (
         <Header
           outerContainerStyles={{ backgroundColor: '#fff' }}
-          leftComponent={{ icon: 'menu', type: 'entypo', color: '#43496A' }}
+          leftComponent={<Icon 
+                            name='menu'
+                            type='entypo'
+                            color='#43496A'
+                            onPress={()=>console.log(navigate)}
+                           />}
           centerComponent={{ text: 'Olive', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
           rightComponent={{ icon: 'heart', type: 'entypo', color: '#43496A' }}
         />)

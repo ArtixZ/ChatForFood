@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import { View, Image, Text } from 'react-native';
-import { Rating } from 'react-native-elements';
+import { View, Image, Text, Dimensions } from 'react-native';
+import { Rating, Button, Header, Icon } from 'react-native-elements';
 import numeral from 'numeral';
-import { Button } from 'react-native-elements'
 
 import BarChart from './BarChart';
 
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+
 class FoodDetail extends Component {
     static navigationOptions = ({navigation}) => ({
-        title: navigation.state.params.foodInfo.name,
-        headerTintColor: 'white',
-            headerStyle: {
-            backgroundColor: 'lightseagreen', 
-            elevation: null
-        },
+        header: ({navigation}) => {
+            return (<Header
+                        outerContainerStyles={{ backgroundColor: '#fff' }}
+                        leftComponent={<Icon 
+                                            name='chevron-left'
+                                            type='entypo'
+                                            color='#43496A'
+                                            onPress={()=>navigation.goBack()}
+                                        />}
+                        centerComponent={{ text: 'Food Profile', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
+                    />)
+        }
     });
     constructor(props) {
         super(props);
@@ -29,7 +36,7 @@ class FoodDetail extends Component {
         const { pic, name, restaurantName, highlights, rating, tags, distance, price } = foodInfo;
         return(
             <View style = {detailContainerSty}>
-
+                
                 <View style = {foodInfoSty}>
                     <View style={thumbnailContainerStyle}>
                         <Image
@@ -49,12 +56,10 @@ class FoodDetail extends Component {
                         />
                         <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
                     </View>
+                    <View style = {abstractSty}>
+                        <Text>This is a bowl of lively salad of grilled chicken. </Text>
+                    </View>
                 </View>
-
-                <View style = {abstractSty}>
-                    <Text>Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of Strips of </Text>
-                </View>
-
                 <View style = {ingredientSty}>
                     <BarChart
                         ingredients = {ingredients}
@@ -76,15 +81,19 @@ class FoodDetail extends Component {
 
 const styles = {
     detailContainerSty: {
+        backgroundColor: '#fff',
         flex: 1
     },
     foodInfoSty: {
-        flex: 3,
-        flexDirection: 'row'
+        flex: 5,
+        flexDirection: 'column'
     },
     abstractSty: {
+        marginLeft: 10,
+        marginRight: 10,
         flex: 1,
-        
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     ingredientSty: {
         flex: 5,
@@ -100,8 +109,9 @@ const styles = {
         marginRight: 10
     },
     thumbnailStyle: {
-        height: 130,
-        width: 200
+        borderRadius: 10,
+        height: SCREEN_WIDTH*0.7,
+        width: SCREEN_WIDTH*0.8
     },
     contentContainerStyle: {
         flex: 1,
