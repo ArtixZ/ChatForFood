@@ -21,7 +21,7 @@ import { ImagePicker } from 'expo';
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
 import { messageSent, getResponse } from '../actions';
-// import PreloadHOC from './PreloadHOC';
+import PreloadHOC from './PreloadHOC';
 
 const TITLE = 'ChatForFood';
 
@@ -181,6 +181,6 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-// export default connect(mapStateToProps, {messageSent, getResponse})(PreloadHOC(ChatUI));
-export default connect(mapStateToProps, {messageSent, getResponse})((ChatUI));
+export default connect(mapStateToProps, {messageSent, getResponse})(PreloadHOC(ChatUI));
+// export default connect(mapStateToProps, {messageSent, getResponse})((ChatUI));
 

@@ -43,10 +43,13 @@ class BarChart extends Component {
             <View style={{flex: 1}}>
                 
                 {Object.keys(ingredients).map( (ing, i) => 
-                    <View key={i} style={{flex: 1}}>
-                        <Text style={{flex: 1}}>{ing}</Text>
-                        <View style={{flex: 1}}>
+                    <View key={i} style={{flex: 1, flexDirection: 'row'}}>
+                        <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={{flex: 1}}>{ing}</Text>
+                        </View>
+                        <View style={{flex: 5, flexDirection: 'row'}}>
                             <Animated.View style={[styles.bar, styles[ing], {width: this.state[ing]}]}/>
+                            <Text>{`${ingredients[ing]}%`}</Text>
                         </View>
                     </View>
                 )}

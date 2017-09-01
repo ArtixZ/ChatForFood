@@ -36,7 +36,7 @@ const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggesti
                                     ratingImage={require('../../assets/pics/rating_dot_grey.png')}
                                     ratingColor='#F98324'
                                     ratingBackgroundColor='#979797'
-                                    imageSize={15}
+                                    imageSize={12}
                                     readonly
                                     startingValue={rating}
                                     style={ratingSty}
@@ -45,10 +45,8 @@ const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggesti
                             </View>
                             <Text style={{color:'#979797', fontSize: 11}}>{`${numeral(distance).format('0.0')} miles`}</Text>                            
                             <Text style={{textAlign:'center'}}>{highlights.toString()}</Text>
-                            <Text style={{color:'white'}}>{`$${price}`}</Text>                            
+                            <Text style={{color:'black'}}>{`$${price}`}</Text>                            
                         </View>
-                        
-
                     </View>
                 </TouchableOpacity>
                 
@@ -97,15 +95,15 @@ const styles = {
         justifyContent: 'space-around'
     },
     thumbnailStyle: {
-        borderTopLeftRadius: 10,
-        width: 170,
-        height: 115
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'cover',
     },
     thumbnailContainerStyle: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10
+        flex:3,
+        borderTopLeftRadius: 10,
+        overflow: 'hidden',     
     },
 }
 

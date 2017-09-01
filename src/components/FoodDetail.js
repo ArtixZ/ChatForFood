@@ -11,7 +11,7 @@ class FoodDetail extends Component {
     static navigationOptions = ({navigation}) => ({
         header: ({navigation}) => {
             return (<Header
-                        outerContainerStyles={{ backgroundColor: '#fff' }}
+                        outerContainerStyles={styles.headerSty}
                         leftComponent={<Icon 
                                             name='chevron-left'
                                             type='entypo'
@@ -24,7 +24,6 @@ class FoodDetail extends Component {
     });
     constructor(props) {
         super(props);
-
     }
     render() {
         const ingredients = {Calories: 19, Fat: 22, Sodium: 31, Carbs: 13, Sugars: 17, Protein: 17}
@@ -80,13 +79,22 @@ class FoodDetail extends Component {
 }
 
 const styles = {
+    headerSty: {
+        backgroundColor: '#fff',
+        position: 'relative'
+    },
     detailContainerSty: {
         backgroundColor: '#fff',
         flex: 1
     },
     foodInfoSty: {
-        flex: 5,
+        marginLeft: 10,
+        marginRight: 10,
+        flex: 7,
         flexDirection: 'column'
+    },
+    ingredientSty: {
+        flex: 4,
     },
     abstractSty: {
         marginLeft: 10,
@@ -95,29 +103,31 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    ingredientSty: {
-        flex: 5,
-    },
     actionSty: {
-        flex: 1
+        flex: 1,
+        marginBottom: 20,
+        justifyContent: 'center',
     },
     thumbnailContainerStyle: {
-        flex: 1,
+        flex: 3,
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10
     },
     thumbnailStyle: {
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'cover',
         borderRadius: 10,
         height: SCREEN_WIDTH*0.7,
         width: SCREEN_WIDTH*0.8
     },
     contentContainerStyle: {
-        flex: 1,
+        flex: 2,
+        marginLeft:35,
         flexDirection: 'column',
         justifyContent: 'space-around',
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
 }
 

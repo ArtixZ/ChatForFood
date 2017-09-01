@@ -27,9 +27,9 @@ export default function PreloadHOC(WrappedComponent) {
 
         async _loadAssetsAsync() {
             const imageAssets = cacheImages(Object.values(IMAGES));
-            await Font.loadAsync({
-                'Montserrat': require('../assets/fonts/Montserrat-Regular.ttf'),
-            });
+            // await Font.loadAsync({
+            //     'Montserrat': require('../assets/fonts/Montserrat-Regular.ttf'),
+            // });
             
 
             await Promise.all([
