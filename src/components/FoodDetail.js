@@ -8,7 +8,7 @@ import BarChart from './BarChart';
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 class FoodDetail extends Component {
-    static navigationOptions = ({navigation}) => ({
+    static navigationOptions = {
         header: ({navigation}) => {
             return (<Header
                         outerContainerStyles={styles.headerSty}
@@ -21,7 +21,7 @@ class FoodDetail extends Component {
                         centerComponent={{ text: 'Food Profile', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
                     />)
         }
-    });
+    };
     constructor(props) {
         super(props);
     }

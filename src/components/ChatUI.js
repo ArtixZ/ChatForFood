@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   StyleSheet,
   Text,
@@ -21,21 +21,20 @@ import { ImagePicker } from 'expo';
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
 import { messageSent, getResponse } from '../actions';
-import PreloadHOC from './PreloadHOC';
 
 const TITLE = 'ChatForFood';
 
-class ChatUI extends React.Component {
+class ChatUI extends Component {
   static navigationOptions = {
-    header: ( {navigate} ) => {
+    header: ( {navigation} ) => {
       return (
         <Header
-          outerContainerStyles={{ backgroundColor: '#fff' }}
+          outerContainerStyles={styles.headerSty}
           leftComponent={<Icon 
                             name='menu'
                             type='entypo'
                             color='#43496A'
-                            onPress={()=>console.log(navigate)}
+                            onPress={()=>console.log(navigation)}
                            />}
           centerComponent={{ text: 'Olive', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
           rightComponent={{ icon: 'heart', type: 'entypo', color: '#43496A' }}
@@ -103,7 +102,6 @@ class ChatUI extends React.Component {
           keyboardShouldPersistTaps={'never'}
           keyboardDismissMode={'on-drag'}
           />
-        <View style={{height: 10}} />
         <KeyboardAvoidingView behavior="padding">
           <View style={styles.footer}>
             <Icon
@@ -130,9 +128,16 @@ class ChatUI extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  headerSty: {
+    backgroundColor: '#F5F5F5',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    elevation: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FAFAFA',
   },
   row: {
     flexDirection: 'row',
@@ -158,7 +163,11 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: 'row',
-    backgroundColor: '#eee',
+    backgroundColor: 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -1 },
+    shadowOpacity: 0.3,
+    elevation: 1,
   },
   camera: {
     paddingHorizontal: 10
@@ -181,6 +190,6 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-export default connect(mapStateToProps, {messageSent, getResponse})(PreloadHOC(ChatUI));
+export default connect(mapStateToProps, {messageSent, getResponse})(ChatUI);
 // export default connect(mapStateToProps, {messageSent, getResponse})((ChatUI));
 

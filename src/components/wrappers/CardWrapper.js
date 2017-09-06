@@ -59,15 +59,20 @@ const styles = {
         flex: 1, 
         padding: 0,
         paddingRight: 4,
-        marginLeft:20,
-        marginRight:20,
-        borderRadius: 10,
+        marginLeft:5,
+        marginRight:5,
         ...Platform.select({
             ios: {
-                shadowColor: 'rgba(0,0,0, .2)',
-                shadowOffset: { height: 0, width: 0 },
-                shadowOpacity: 6,
-                shadowRadius: 1,
+                borderWidth: 1,
+                borderRadius: 2,
+                borderColor: '#ddd',
+                borderBottomWidth: 0,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.8,
+                shadowRadius: 2,
+                elevation: 1,
+                marginTop: 10,
             },
             android: {
                 elevation: 1,
@@ -83,7 +88,8 @@ const styles = {
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomLeftRadius: 10
+        borderBottomLeftRadius: 2,
+        overflow: 'hidden',
     },
     bkgColor: {
         backgroundColor: '#bfa',
@@ -102,8 +108,8 @@ const styles = {
     },
     thumbnailContainerStyle: {
         flex:3,
-        borderTopLeftRadius: 10,
         overflow: 'hidden',     
+        borderTopLeftRadius: 2,
     },
 }
 

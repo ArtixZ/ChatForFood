@@ -9,6 +9,7 @@ import reducers from './src/reducers';
 // import AppNavigator from './src/AppNavigator';
 import ChatUI from './src/components/ChatUI';
 import FoodDetail from './src/components/FoodDetail';
+import PreloadHOC from './src/components/PreloadHOC';
 
 class App extends Component {
   componentWillMount() {
@@ -39,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default PreloadHOC(App);
