@@ -3,6 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Dimensions,
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -20,9 +21,11 @@ import { ImagePicker } from 'expo';
 
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
-import { messageSent, getResponse } from '../actions';
+import { messageSent, getResponse, selectCameraImg } from '../actions';
 
 const TITLE = 'ChatForFood';
+
+const { width: SYSTEM_WIDTH } = Dimensions.get('window');
 
 class ChatUI extends Component {
   static navigationOptions = {
@@ -36,7 +39,7 @@ class ChatUI extends Component {
                             color='#43496A'
                             onPress={()=>console.log(navigation)}
                            />}
-          centerComponent={{ text: 'Olive', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
+          centerComponent={<View style={styles.headerTxtWrapper}><Text style={{fontFamily: 'System',color: '#43496A',fontSize: 20}}>Olive</Text></View>}
           rightComponent={{ icon: 'heart', type: 'entypo', color: '#43496A' }}
         />)
     }
@@ -61,7 +64,7 @@ class ChatUI extends Component {
     if (this.state.typing) {
         this.props.messageSent(this.state.typing);        
         this.setState({ typing: null });
-        this.props.getResponse(this.state.typing);
+        // this.props.getResponse(this.state.typing);
     }
   }
   onCamera = async () => {
@@ -73,7 +76,7 @@ class ChatUI extends Component {
     console.log(result);
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      this.props.selectCameraImg(result);
     }
   };
 
@@ -107,19 +110,27 @@ class ChatUI extends Component {
             <Icon
               type="entypo"
               onPress={this.onCamera}
-              color='#F98324'
+              color='#5C6BC0'
               iconStyle={styles.camera}
-              name='camera' />
-            <TextInput
-              value={this.state.typing}
-              style={styles.input}
-              underlineColorAndroid="transparent"
-              placeholder="What to have..."
-              onChangeText={text => this.setState({ typing: text })}
+              name='camera' 
+            />
+            <View style={styles.inputArea}>
+              <TextInput
+                value={this.state.typing}
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="What to have..."
+                onChangeText={text => this.setState({ typing: text })}
               />
-            <TouchableOpacity onPress={this.sendMessage}>
-              <Text style={styles.send}>Send</Text>
-            </TouchableOpacity>
+              <Icon
+                type="entypo"
+                name='paper-plane'
+                onPress={this.sendMessage}
+                underlayColor='#eee'
+                color='#C5CAE9'
+              />
+            </View>
+            
           </View>
         </KeyboardAvoidingView>
       </View>
@@ -134,6 +145,16 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.3,
     elevation: 1,
+  },
+  headerTxtWrapper: {
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: SYSTEM_WIDTH * 0.4,
+    height: '100%',
+    borderColor: '#5C6BC0',
+    borderBottomWidth:2,
+    marginBottom: -10
   },
   container: {
     flex: 1,
@@ -162,6 +183,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   footer: {
+    height: 50,    
     flexDirection: 'row',
     backgroundColor: 'white',
     shadowColor: '#000',
@@ -172,10 +194,20 @@ const styles = StyleSheet.create({
   camera: {
     paddingHorizontal: 10
   },
+  inputArea: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#eee',
+    marginTop: 5,
+    marginBottom: 5,
+    marginRight: 10,
+    borderRadius:4,
+    paddingRight: 5
+  },
   input: {
-    paddingRight: 20,
     fontSize: 18,
     flex: 1,
+    paddingLeft: 10,
   },
   send: {
     alignSelf: 'center',
@@ -190,6 +222,6 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-export default connect(mapStateToProps, {messageSent, getResponse})(ChatUI);
+export default connect(mapStateToProps, {messageSent, getResponse, selectCameraImg})(ChatUI);
 // export default connect(mapStateToProps, {messageSent, getResponse})((ChatUI));
 
