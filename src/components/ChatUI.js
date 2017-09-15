@@ -21,7 +21,7 @@ import { ImagePicker } from 'expo';
 
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
-import { messageSent, getResponse, selectCameraImg } from '../actions';
+import { sendMessage, getResponse, selectCameraImg } from '../actions';
 
 const TITLE = 'ChatForFood';
 
@@ -62,7 +62,7 @@ class ChatUI extends Component {
 
   sendMessage() {
     if (this.state.typing) {
-        this.props.messageSent(this.state.typing);        
+        this.props.sendMessage(this.state.typing);        
         this.setState({ typing: null });
         // this.props.getResponse(this.state.typing);
     }
@@ -222,6 +222,6 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-export default connect(mapStateToProps, {messageSent, getResponse, selectCameraImg})(ChatUI);
-// export default connect(mapStateToProps, {messageSent, getResponse})((ChatUI));
+export default connect(mapStateToProps, {sendMessage, getResponse, selectCameraImg})(ChatUI);
+// export default connect(mapStateToProps, {sendMessage, getResponse})((ChatUI));
 
