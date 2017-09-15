@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, Platform } from 'react-native';
-import { Card } from 'react-native-elements'
-import { Rating } from 'react-native-elements';
+import { Card, Rating } from 'react-native-elements'
 import numeral from 'numeral';
 
 import { CardHorizontal, CardSection } from '../common';
@@ -21,20 +20,19 @@ const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggesti
                                 source={thumbnail_image}
                             />
                         </View>
-                        <View style={txtCardContainer}>
-                            <Text style={{color:'white'}}>{foodName}</Text>
-                        </View>
+                        
                     </View>
 
 
                     <View flex={2} flexDirection={'column'}>
                         <View style={contentContainerStyle}>
-                            <Text style={{fontFamily: 'System', fontSize: 17}}>{restaurantName}</Text>
+                            <Text style={{fontFamily: 'System', fontSize: 17}}>{foodName}</Text>
+                            <Text style={{fontSize: 15}}>{restaurantName}</Text>                            
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
                                 <Rating
                                     type='custom'
                                     ratingImage={require('../../assets/pics/rating_dot_grey.png')}
-                                    ratingColor='#F98324'
+                                    ratingColor='#4B53FF'
                                     ratingBackgroundColor='#979797'
                                     imageSize={12}
                                     readonly
@@ -107,7 +105,7 @@ const styles = {
         resizeMode: 'cover',
     },
     thumbnailContainerStyle: {
-        flex:3,
+        flex:1,
         overflow: 'hidden',     
         borderTopLeftRadius: 2,
     },
