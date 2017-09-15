@@ -1,7 +1,9 @@
 import React  from 'react';
 import CardWrapper from '../wrappers/CardWrapper';
 import SwipCard from '../wrappers/SwipCard';
+import FoodClassCard from '../wrappers/FoodClassCard';
 import { Text, Divider } from 'react-native-elements'
+import { FileSystem } from 'expo';
 
 
 const MessageBubble = ({ id, outOrIn, timestamp, body, navigation }) => {
@@ -32,6 +34,17 @@ const MessageBubble = ({ id, outOrIn, timestamp, body, navigation }) => {
             );
         case 'divider':
             return <Divider style={dividerStyle} />
+        case 'imgRecognition':
+            const { picURI, foodClass, picBase64 } = body.payload;
+            // FileSystem.readDirectoryAsync(
+            //     FileSystem.documentDirectory + 'photos'
+            // )
+            return (
+                <FoodClassCard 
+                    picURI = {picURI}
+                    picBase64 = {picBase64}
+                    foodClass = {foodClass}
+                />)
         default:
             console.log(type);
     }
