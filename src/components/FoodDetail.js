@@ -69,7 +69,7 @@ class FoodDetail extends Component {
                     <Button
                         large
                         iconRight
-                        backgroundColor={'#159589'}
+                        backgroundColor={'#42A5F5'}
                         icon={{name: 'local-cafe'}}
                         title='HAVE IT' />
                 </View>
