@@ -2,6 +2,7 @@ import moment from 'moment';
 import {
     TXT_CHAT_MESSAGE,
     TXT_RESPONSE_MESSAGE,
+    FOOD_CLASS
 } from '../actions/types';
 
 import {data, IMAGES} from './data';
@@ -122,6 +123,9 @@ export default (state = INIT_STATE, action) => {
                 return [...state, divider, ...lastTxt, txtMessage, ...cardMessage];
             }
             return [...state];
+        case FOOD_CLASS: 
+            const foodClassMessage = generateFoodClassMsg(action.payload);
+            return [...state, foodClassMessage]
         default: 
             return state;
     }
@@ -218,6 +222,22 @@ function generateDivider () {
         direction: 'ingoing',
         body: {
             type: 'divider',
+        }
+    }
+}
+
+generateFoodClassMsg = ({imgURI, foodClass, imgBase64}) => {
+    return {
+        msg_id: `temp_${generateGuuId()}`,
+        timeStamp: moment().toISOString(),
+        direction: 'ingoing',
+        body: {
+            type: 'imgRecognition',
+            payload: {
+                picURI: imgURI,
+                picBase64: imgBase64,
+                foodClass
+            }
         }
     }
 }
