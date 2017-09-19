@@ -25,7 +25,7 @@ class FoodClassCard extends Component {
             if(i === index) {
                 item.checked = true;
             }else {
-                item.checked = false
+                item.checked = false;
             }
         })
         this.setState({foodClasses: [...foodClasses]});
@@ -67,8 +67,6 @@ class FoodClassCard extends Component {
             </Card>
         )
     }
-    
-    
 }
 
 const styles = {

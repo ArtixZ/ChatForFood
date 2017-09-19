@@ -227,7 +227,7 @@ function generateDivider () {
 }
 
 generateFoodClassMsg = ({imgURI, foodClass, imgBase64}) => {
-    return {
+    return Object.assign({}, {
         msg_id: `temp_${generateGuuId()}`,
         timeStamp: moment().toISOString(),
         direction: 'ingoing',
@@ -239,5 +239,5 @@ generateFoodClassMsg = ({imgURI, foodClass, imgBase64}) => {
                 foodClass
             }
         }
-    }
+    });
 }
