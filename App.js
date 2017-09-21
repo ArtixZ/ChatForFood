@@ -3,10 +3,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 // import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
-import { StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import reducers from './src/reducers';
 // import AppNavigator from './src/AppNavigator';
+import FBAuth from './src/components/FBAuth';
 import ChatUI from './src/components/ChatUI';
 import FoodDetail from './src/components/FoodDetail';
 import PreloadHOC from './src/components/PreloadHOC';
@@ -27,9 +28,19 @@ class App extends Component {
 
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
-    const MainNavigator = StackNavigator({
-      chatUI: {screen: ChatUI},
-      foodDetail: {screen: FoodDetail}
+    const MainNavigator = TabNavigator({
+      auth: { screen: FBAuth },
+      main: {
+        screen: StackNavigator({
+          chatUI: {screen: ChatUI},
+          foodDetail: {screen: FoodDetail}
+        })
+      }
+    }, {
+      navigationOptions: {
+        tabBarVisible: false
+      },
+      lazy: true
     });
 
     return (

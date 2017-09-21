@@ -26,6 +26,7 @@
     "react-native": "^0.46.1",
     "react-native-elements": "^0.15.0",
     "react-native-material-kit": "^0.4.1",
+    "react-native-progress": "^3.4.0",
     "react-native-swiper": "^1.5.10",
     "react-native-training-chat-server": "^1.1.2",
     "react-navigation": "^1.0.0-beta.11",

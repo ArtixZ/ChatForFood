@@ -3,7 +3,9 @@ export const PASSWORD_CHANGED = 'password_changed';
 export const LOGIN_USER_SUCCESS = 'login_user_success';
 export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
-
+/*--------------- Auth ---------------------*/
+export const FACEBOOK_LOGIN_SUCCESS = 'FACEBOOK_LOGIN_SUCCESS';
+export const FACEBOOK_LOGIN_FAIL = 'FACEBOOK_LOGIN_FAIL';
 /*--------------- chat ---------------------*/
 
 export const TXT_CHAT_MESSAGE = 'TXT_CHAT_MESSAGE';
