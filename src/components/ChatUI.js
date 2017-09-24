@@ -116,6 +116,8 @@ class ChatUI extends Component {
             />
             <View style={styles.inputArea}>
               <TextInput
+                returnKeyType='send'
+                onSubmitEditing={this.sendMessage}
                 value={this.state.typing}
                 style={styles.input}
                 underlineColorAndroid="transparent"
