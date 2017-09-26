@@ -100,6 +100,7 @@ class ChatUI extends Component {
     return (
       <View style={styles.container}>
         <ReversedList
+          removeClippedSubviews={false}
           data={messages}
           renderItem={this.renderRow}
           keyboardShouldPersistTaps={'never'}

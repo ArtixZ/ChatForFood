@@ -43,6 +43,7 @@ export default class extends Component {
         return (
             <View>
                 <Swiper
+                    removeClippedSubviews={false}
                     showsPagination={false}
                     containerStyle={styles.wrapper}
                     height={170}
