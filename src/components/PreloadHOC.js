@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Expo, { Font } from 'expo';
+import firebase from 'firebase';
+
+
 import {IMAGES} from '../reducers/data';
 
 function cacheImages(images) {
@@ -22,7 +25,23 @@ export default function PreloadHOC(WrappedComponent) {
         }
 
         componentWillMount() {
+            this._initFirebase();
             this._loadAssetsAsync();
+        }
+
+
+        _initFirebase() {
+            const config = {
+                apiKey: "AIzaSyCzhEJV07MC8QWW2bQtttEA2fuXTq6AEhc",
+                authDomain: "chatforfood-b4819.firebaseapp.com",
+                databaseURL: "https://chatforfood-b4819.firebaseio.com",
+                projectId: "chatforfood-b4819",
+                storageBucket: "chatforfood-b4819.appspot.com",
+                messagingSenderId: "445326614913"
+              };
+              if (!firebase.apps.length) {
+                firebase.initializeApp(config);
+              }
         }
 
         async _loadAssetsAsync() {
