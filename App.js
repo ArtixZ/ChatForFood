@@ -6,7 +6,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 
 import reducers from './src/reducers';
 // import AppNavigator from './src/AppNavigator';
-import FBAuth from './src/components/FBAuth';
+import Auth from './src/components/Auth';
 import ChatUI from './src/components/ChatUI';
 import FoodDetail from './src/components/FoodDetail';
 import PreloadHOC from './src/components/PreloadHOC';
@@ -21,7 +21,7 @@ class App extends Component {
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     const MainNavigator = TabNavigator({
-      auth: { screen: FBAuth },
+      auth: { screen: Auth },
       main: {
         screen: StackNavigator({
           chatUI: {screen: ChatUI},

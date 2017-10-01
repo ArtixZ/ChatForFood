@@ -1,20 +1,31 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { 
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Card, CardSection, Input, Button, Spinner } from './common';
+import { Card, CardSection, Button, Spinner, Input } from './common';
 
 class LoginForm extends Component {
+  state = {
+    email: '',
+    password: ''
+  }
+
   onEmailChange(text) {
-    this.props.emailChanged(text);
+    this.setState({email: text});
   }
 
   onPasswordChange(text) {
-    this.props.passwordChanged(text);
+    this.setState({password: text});
   }
 
   onButtonPress() {
-    const { email, password } = this.props;
+    const { email, password } = this.state;
 
     this.props.loginUser({ email, password });
   }
@@ -33,39 +44,65 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            label="Email"
-            placeholder="email@gmail.com"
-            onChangeText={this.onEmailChange.bind(this)}
-            value={this.props.email}
-          />
-        </CardSection>
+      <KeyboardAvoidingView behavior="padding" style={styles.containerSty}>
 
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="Password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
-          />
-        </CardSection>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>      
+          <View flex={1} />
+        </TouchableWithoutFeedback>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
+        <Card>
+          <CardSection>
+            <Input
+              label="Email"
+              placeholder="email@gmail.com"
+              keyboardType="email-address"
+              enablesReturnKeyAutomatically
+              autoCorrect={false}
+              autoCapitalize={'none'}
+              onChangeText={this.onEmailChange.bind(this)}
+              value={this.state.email}
+              returnKeyType="next"
+              onSubmitEditing={() => this.passwordInputArea.focus()}
+            />
+          </CardSection>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+          <CardSection>
+            <Input
+              secureTextEntry
+              label="Password"
+              placeholder="password"
+              enablesReturnKeyAutomatically
+              onChangeText={this.onPasswordChange.bind(this)}
+              value={this.state.password}
+              returnKeyType="done"
+              onSubmitEditing={() => this.onButtonPress()}
+              REF={ ref => this.passwordInputArea = ref}
+            />
+          </CardSection>
+
+          <Text style={styles.errorTextStyle}>
+            {this.props.error}
+          </Text>
+
+          <CardSection>
+            {this.renderButton()}
+          </CardSection>
+        </Card>
+
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>      
+          <View flex={1} />
+        </TouchableWithoutFeedback>
+      
+      </KeyboardAvoidingView>
     );
   }
 }
 
 const styles = {
+  containerSty: {
+    flex: 1,
+    justifyContent: 'center'
+  },
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
@@ -74,11 +111,9 @@ const styles = {
 };
 
 const mapStateToProps = ({ auth }) => {
-  const { email, password, error, loading } = auth;
+  const { error, loading } = auth;
 
-  return { email, password, error, loading };
+  return { error, loading };
 };
 
-export default connect(mapStateToProps, {
-  emailChanged, passwordChanged, loginUser
-})(LoginForm);
+export default connect(mapStateToProps, { loginUser })(LoginForm);

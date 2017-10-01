@@ -41,6 +41,10 @@ export default function PreloadHOC(WrappedComponent) {
               };
               if (!firebase.apps.length) {
                 firebase.initializeApp(config);
+              } else {
+                firebase.app().delete().then(function() {
+                    firebase.initializeApp(config);
+                });
               }
         }
 
