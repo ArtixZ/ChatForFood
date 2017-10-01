@@ -16,7 +16,11 @@ class FoodDetail extends Component {
                                             name='chevron-left'
                                             type='entypo'
                                             color='#43496A'
-                                            onPress={()=>navigation.goBack()}
+                                            onPress={()=>{
+                                                routes = navigation.state.routes;
+                                                curRoute = routes[routes.length - 1]
+                                                navigation.goBack(curRoute.key)
+                                            }}
                                         />}
                         centerComponent={{ text: 'Food Profile', style: { fontFamily: 'System', color: '#43496A', fontSize: 20 } }} 
                     />)
