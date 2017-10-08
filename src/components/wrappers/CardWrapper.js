@@ -105,9 +105,10 @@ const styles = {
         resizeMode: 'cover',
     },
     thumbnailContainerStyle: {
-        flex:1,
+        flex: 1,
         overflow: 'hidden',     
         borderTopLeftRadius: 2,
+        borderBottomLeftRadius: 2
     },
 }
 
