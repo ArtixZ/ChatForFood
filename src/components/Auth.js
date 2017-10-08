@@ -14,7 +14,7 @@ class AuthScreen extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         Keyboard.dismiss();
-        this.props.navigation.navigate('main');
+        this.props.navigation.navigate('logOut');
         this.setState({ loggedIn: true});
       } else {
         this.setState({ loggedIn: false });

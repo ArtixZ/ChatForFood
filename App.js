@@ -10,6 +10,7 @@ import Auth from './src/components/Auth';
 import ChatUI from './src/components/ChatUI';
 import FoodDetail from './src/components/FoodDetail';
 import PreloadHOC from './src/components/PreloadHOC';
+import LogOut from './src/components/LogOut';
 
 class App extends Component {
   state = { loggedIn: null };
@@ -27,7 +28,8 @@ class App extends Component {
           chatUI: {screen: ChatUI},
           foodDetail: {screen: FoodDetail}
         })
-      }
+      },
+      logOut: {screen: LogOut},
     }, {
       navigationOptions: {
         tabBarVisible: false
