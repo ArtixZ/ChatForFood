@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { 
   Text,
+  TextInput,
   View,
   KeyboardAvoidingView,
   Keyboard,
+  TouchableOpacity,
   TouchableWithoutFeedback,
+  StatusBar
 } from 'react-native';
+import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { emailChanged, passwordChanged, loginUser } from '../actions';
-import { Card, CardSection, Button, Spinner, Input } from './common';
+import { Spinner, Input } from './common';
 
 class LoginForm extends Component {
   state = {
@@ -30,69 +34,66 @@ class LoginForm extends Component {
     this.props.loginUser({ email, password });
   }
 
-  renderButton() {
-    if (this.props.loading) {
-      return <Spinner size="large" />;
-    }
-
-    return (
-      <Button onPress={this.onButtonPress.bind(this)}>
-        Login
-      </Button>
-    );
-  }
-
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.containerSty}>
-
+        <StatusBar barStyle="light-content"/>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>      
           <View flex={1} />
         </TouchableWithoutFeedback>
 
-        <Card>
-          <CardSection>
-            <Input
-              label="Email"
-              placeholder="email@gmail.com"
-              keyboardType="email-address"
-              enablesReturnKeyAutomatically
-              autoCorrect={false}
-              autoCapitalize={'none'}
-              onChangeText={this.onEmailChange.bind(this)}
-              value={this.state.email}
-              returnKeyType="next"
-              onSubmitEditing={() => this.passwordInputArea.focus()}
-            />
-          </CardSection>
+        <TextInput
+          style={styles.inputSty}
+          label="Email"
+          placeholder="email"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          keyboardType="email-address"
+          enablesReturnKeyAutomatically
+          autoCorrect={false}
+          autoCapitalize={'none'}
+          onChangeText={this.onEmailChange.bind(this)}
+          value={this.state.email}
+          returnKeyType="next"
+          onSubmitEditing={() => this.passwordInputArea.focus()}
+        />
 
-          <CardSection>
-            <Input
-              secureTextEntry
-              label="Password"
-              placeholder="password"
-              enablesReturnKeyAutomatically
-              onChangeText={this.onPasswordChange.bind(this)}
-              value={this.state.password}
-              returnKeyType="done"
-              onSubmitEditing={() => this.onButtonPress()}
-              REF={ ref => this.passwordInputArea = ref}
-            />
-          </CardSection>
-
+        <TextInput
+          style={styles.inputSty}
+          secureTextEntry
+          label="Password"
+          placeholder="password"
+          placeholderTextColor="rgba(255,255,255,0.7)"
+          enablesReturnKeyAutomatically
+          onChangeText={this.onPasswordChange.bind(this)}
+          value={this.state.password}
+          returnKeyType="done"
+          onSubmitEditing={() => this.onButtonPress()}
+          ref={ ref => this.passwordInputArea = ref}
+        />
+        {
+          this.props.error ?
           <Text style={styles.errorTextStyle}>
-            {this.props.error}
+            {this.props.error} 
           </Text>
+          : null
+        }
 
-          <CardSection>
-            {this.renderButton()}
-          </CardSection>
-        </Card>
+        {
+          this.props.loading ? 
+          <Spinner size="large" />
+          : 
+          <TouchableOpacity 
+            style={styles.btnContainerSty}
+            onPress={this.onButtonPress.bind(this)}
+          >
+            <Text style={styles.btnTextSty}>LOGIN</Text>
+          </TouchableOpacity>
+        }
 
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>      
           <View flex={1} />
         </TouchableWithoutFeedback>
-      
+
       </KeyboardAvoidingView>
     );
   }
@@ -101,12 +102,30 @@ class LoginForm extends Component {
 const styles = {
   containerSty: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#5C6BC0',
+    padding: 20,
   },
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
     color: 'red'
+  },
+  inputSty: {
+    height: 40,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    color: '#FFF',
+    paddingHorizontal: 10,
+    marginBottom: 20
+  },
+  btnContainerSty: {
+    backgroundColor: '#3F51B5',
+    paddingVertical: 15
+  },
+  btnTextSty: {
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontWeight: '700'
   }
 };
 
