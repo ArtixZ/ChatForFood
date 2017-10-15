@@ -2,7 +2,8 @@ import moment from 'moment';
 import {
     TXT_CHAT_MESSAGE,
     TXT_RESPONSE_MESSAGE,
-    FOOD_CLASS
+    FOOD_CLASS,
+    GET_FOOD_DETAILS
 } from '../actions/types';
 
 import {data, IMAGES} from './data';
@@ -28,33 +29,35 @@ const PAYLOADS = data.map((item, index) => {
 const m = Math.ceil(PAYLOADS.length / 3);
 const n = Math.ceil(2 * PAYLOADS.length / 3);
 
-const INIT_STATE = [
-    {
-        msg_id: `temp_${generateGuuId()}`,
-        timeStamp: moment().toISOString(),
-        direction: 'ingoing',
-        body: {
-            type: 'card',
-            payload: PAYLOADS.slice(0, m)
-        }
-    }, {
-        msg_id: `temp_${generateGuuId()}`,
-        timeStamp: moment().toISOString(),
-        direction: 'ingoing',
-        body: {
-            type: 'card',
-            payload: PAYLOADS.slice(m, n)
-        }
-    }, {
-        msg_id: `temp_${generateGuuId()}`,
-        timeStamp: moment().toISOString(),
-        direction: 'ingoing',
-        body: {
-            type: 'card',
-            payload: PAYLOADS.slice(n)
-        }
-    }
-];
+// const INIT_STATE = [
+//     {
+//         msg_id: `temp_${generateGuuId()}`,
+//         timeStamp: moment().toISOString(),
+//         direction: 'ingoing',
+//         body: {
+//             type: 'card',
+//             payload: PAYLOADS.slice(0, m)
+//         }
+//     }, {
+//         msg_id: `temp_${generateGuuId()}`,
+//         timeStamp: moment().toISOString(),
+//         direction: 'ingoing',
+//         body: {
+//             type: 'card',
+//             payload: PAYLOADS.slice(m, n)
+//         }
+//     }, {
+//         msg_id: `temp_${generateGuuId()}`,
+//         timeStamp: moment().toISOString(),
+//         direction: 'ingoing',
+//         body: {
+//             type: 'card',
+//             payload: PAYLOADS.slice(n)
+//         }
+//     }
+// ];
+
+const INIT_STATE = []
 
 
 
@@ -126,10 +129,48 @@ export default (state = INIT_STATE, action) => {
         case FOOD_CLASS: 
             const foodClassMessage = generateFoodClassMsg(action.payload);
             return [...state, foodClassMessage]
+        case GET_FOOD_DETAILS: 
+            console.log(action.payload);
+            const initialMsgs = generateInitMsgs(action.payload);
+            return initialMsgs
         default: 
             return state;
     }
 };
+
+function generateInitMsgs(messages) {
+    messages = messages.filter( i=> !!i.image_uri);
+    
+    const m = Math.ceil(messages.length / 3);
+    const n = Math.ceil(2 * messages.length / 3);
+
+    return messages.length === 0 ? null : 
+    [{
+        msg_id: `temp_${generateGuuId()}`,
+        timeStamp: moment().toISOString(),
+        direction: 'ingoing',
+        body: {
+            type: 'card',
+            payload: messages.slice(0,m)
+        }
+    }, {
+        msg_id: `temp_${generateGuuId()}`,
+        timeStamp: moment().toISOString(),
+        direction: 'ingoing',
+        body: {
+            type: 'card',
+            payload: messages.slice(m,n)
+        }
+    }, {
+        msg_id: `temp_${generateGuuId()}`,
+        timeStamp: moment().toISOString(),
+        direction: 'ingoing',
+        body: {
+            type: 'card',
+            payload: messages.slice(n)
+        }
+    }]
+}
 
 
 function generateGuuId() {
