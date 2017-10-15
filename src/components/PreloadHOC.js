@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Expo, { Font } from 'expo';
+import { Platform } from 'react-native';
+import Expo, { Font, Constants, Location, Permissions } from 'expo';
 import firebase from 'firebase';
 
 
@@ -27,6 +28,13 @@ export default function PreloadHOC(WrappedComponent) {
         componentWillMount() {
             this._initFirebase();
             this._loadAssetsAsync();
+            // if (Platform.OS === 'android' && !Constants.isDevice) {
+            //     this.setState({
+            //         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+            //     });
+            // } else {
+            //     this._getLocationAsync();
+            // }
         }
 
 
@@ -38,14 +46,14 @@ export default function PreloadHOC(WrappedComponent) {
                 projectId: "chatforfood-b4819",
                 storageBucket: "chatforfood-b4819.appspot.com",
                 messagingSenderId: "445326614913"
-              };
-              if (!firebase.apps.length) {
+            };
+            if (!firebase.apps.length) {
                 firebase.initializeApp(config);
-              } else {
+            } else {
                 firebase.app().delete().then(function() {
                     firebase.initializeApp(config);
                 });
-              }
+            }
         }
 
         async _loadAssetsAsync() {
@@ -58,9 +66,19 @@ export default function PreloadHOC(WrappedComponent) {
             await Promise.all([
                 ...imageAssets,
             ]);
-
-            this.setState({appIsReady: true});
+            this.setState({ location, appIsReady: true });            
         }
+
+        _getLocationAsync = async () => {
+            let { status } = await Permissions.askAsync(Permissions.LOCATION);
+            if (status !== 'granted') {
+              this.setState({
+                errorMessage: 'Permission to access location was denied',
+              });
+            }
+        
+            let location = await Location.getCurrentPositionAsync({});
+          };
 
         render() {
             if (!this.state.appIsReady) {

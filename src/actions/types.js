@@ -16,3 +16,7 @@ export const FOOD_CLASS = 'FOOD_CLASS';
 
 export const CAMERA_IMAGE_URI = 'CAMERA_IMAGE_URI';
 export const CAMERA_IMAGE_FOOD_IMG = 'CAMERA_IMAGE_FOOD_IMG';
+
+/*--------------- recommendation ---------------------*/
+
+export const GET_FOOD_DETAILS = 'GET_FOOD_DETAILS';
