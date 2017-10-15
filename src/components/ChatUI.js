@@ -21,7 +21,7 @@ import { ImagePicker } from 'expo';
 
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
-import { sendMessage, getResponse, selectCameraImg } from '../actions';
+import { sendMessage, getResponse, selectCameraImg, getRecommendation } from '../actions';
 
 const TITLE = 'ChatForFood';
 
@@ -54,6 +54,11 @@ class ChatUI extends Component {
     this.renderRow = this.renderRow.bind(this);
   }
 
+  componentWillMount() {
+    const { getRecommendation } = this.props;
+    getRecommendation();
+  }
+
   componentWillUpdate (nextProps, nextState) {
     UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     LayoutAnimation.spring();
@@ -81,13 +86,13 @@ class ChatUI extends Component {
   };
 
   renderRow(rowData) {
-        const { msg_id, timestamp, direction, body } = rowData.item;
+        const { msg_id, timeStamp, direction, body } = rowData.item;
         const { navigation } = this.props;
         return (
             <MessageBubble
                 key={rowData.index}
                 outOrIn={direction}
-                timestamp={timestamp}
+                timestamp={timeStamp}
                 body={body}
                 navigation={navigation}
             />
@@ -225,6 +230,6 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-export default connect(mapStateToProps, {sendMessage, getResponse, selectCameraImg})(ChatUI);
+export default connect(mapStateToProps, {sendMessage, getResponse, selectCameraImg, getRecommendation})(ChatUI);
 // export default connect(mapStateToProps, {sendMessage, getResponse})((ChatUI));
 

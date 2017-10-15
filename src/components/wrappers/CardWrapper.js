@@ -17,7 +17,7 @@ const CardWrapper = ({ thumbnail_image, foodName, restaurantName, tags, suggesti
                         <View style={thumbnailContainerStyle}>
                             <Image
                                 style={thumbnailStyle}
-                                source={thumbnail_image}
+                                source={{uri: thumbnail_image}}
                             />
                         </View>
                         

@@ -44,7 +44,7 @@ class FoodDetail extends Component {
                     <View style={thumbnailContainerStyle}>
                         <Image
                             style={thumbnailStyle}
-                            source={pic}
+                            source={{uri: pic}}
                         />
                     </View>
                     <View style={contentContainerStyle}>

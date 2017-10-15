@@ -7,7 +7,9 @@ import {
     Platform
 } from 'react-native';
 import Swiper from 'react-native-swiper';
+
 import CardWrapper from './CardWrapper';
+import { photoURL } from '../../actions/urls';
 
 const { width } = Dimensions.get('window');
 // const loading = require('./img/loading.gif');
@@ -51,7 +53,8 @@ export default class extends Component {
                 >
                     {
                         cards.map((card, i) => {
-                            const { pic, name, restaurantName, tags, distance, highlights, suggestion, rating, price } = card;
+                            let { image_uri: pic, food_name: name, restaurant_detail:{restaurant_name: restaurantName, restaurant_cuisine: highlights}, tags, distance = 3, suggestion, food_rating: rating, price = 12 } = card;
+                            pic = `${photoURL}/${pic}`;
                             return (<CardWrapper
                                         key={i}
                                         thumbnail_image={pic}
@@ -63,7 +66,7 @@ export default class extends Component {
                                         suggestion={suggestion}
                                         rating={rating}
                                         price={price}
-                                        onCardPress={this.onCardPress.bind(this, card)}
+                                        onCardPress={this.onCardPress.bind(this, { pic, name, restaurantName, highlights, tags, distance, suggestion, rating, price })}
                                     />)
                             })
                     }

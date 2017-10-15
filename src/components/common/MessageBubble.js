@@ -1,12 +1,12 @@
 import React  from 'react';
 import CardWrapper from '../wrappers/CardWrapper';
-import SwipCard from '../wrappers/SwipCard';
+import SwipeCard from '../wrappers/SwipeCard';
 import FoodClassCard from '../wrappers/FoodClassCard';
 import { Text, Divider } from 'react-native-elements'
 import { FileSystem } from 'expo';
 
 
-const MessageBubble = ({ id, outOrIn, timestamp, body, navigation }) => {
+const MessageBubble = ({ outOrIn, timestamp, body, navigation }) => {
 
     const { textStyle, dividerStyle } = styles;
     const { type } = body;
@@ -15,7 +15,6 @@ const MessageBubble = ({ id, outOrIn, timestamp, body, navigation }) => {
         case 'txt': 
             return (
                 <Text
-                    key={id}
                     style={{ ...textStyle, alignSelf: leftOrRight }}
                 >
                     {body.msg}
@@ -26,8 +25,7 @@ const MessageBubble = ({ id, outOrIn, timestamp, body, navigation }) => {
         case 'card':
             const { payload } = body;
             return (
-                <SwipCard
-                    key={id}
+                <SwipeCard
                     cards = {payload}
                     navigation={navigation}
                 />
