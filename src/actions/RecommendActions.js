@@ -8,7 +8,7 @@ import {
 
 export const getRecommendation = () => {
     return (dispatch, getState) => {
-        const data = {"keyword": "Italian"};
+        const data = {"keyword": "Asian Seafood"};
 
         callAPI( 'POST', FOOD_DETAILS_FROM_KEYWORDS, data)
         .then( res => {
