@@ -3,7 +3,10 @@ import {
     TXT_CHAT_MESSAGE,
     TXT_RESPONSE_MESSAGE,
     FOOD_CLASS,
-    GET_FOOD_DETAILS
+    GET_FOOD_DETAILS,
+    TAKEN_IMAGE,
+    TAKEN_IMAGE_RESPONSE_LOADING,
+    CAMERA_IMAGE_FOOD_IMG
 } from '../actions/types';
 
 import {data, IMAGES} from './data';
@@ -133,10 +136,56 @@ export default (state = INIT_STATE, action) => {
             console.log(action.payload);
             const initialMsgs = generateInitMsgs(action.payload);
             return initialMsgs
+
+        case TAKEN_IMAGE:
+            const takenPic = generateTakenPic(action.payload)
+            return [...state, takenPic]
+        case TAKEN_IMAGE_RESPONSE_LOADING:
+            return [...state, {
+                msg_id: `temp_${generateGuuId()}`,
+                timeStamp: moment().toISOString(),
+                direction: 'ingoing',
+                body: {
+                    type: 'takenImgLoadingResponse',
+                    payload: {}
+                }
+            }]
+        case CAMERA_IMAGE_FOOD_IMG:
+            const takenPicOptions = generateTakenPicOptions(action.payload);
+            state.pop();
+            return [...state, takenPicOptions];
         default: 
             return state;
     }
 };
+
+function generateTakenPicOptions(options) {
+    return {
+        msg_id: `temp_${generateGuuId()}`,
+        timeStamp: moment().toISOString(),
+        direction: 'ingoing',
+        body: {
+            type: 'takenImgOptions',
+            payload: {
+                options
+            }
+        }
+    }
+}
+
+function generateTakenPic(uri) {
+    return {
+        msg_id: `temp_${generateGuuId()}`,
+        timeStamp: moment().toISOString(),
+        direction: 'outgoing',
+        body: {
+            type: 'takenImg',
+            payload: {
+                picURI: uri,
+            }
+        }
+    }
+}
 
 function generateInitMsgs(messages) {
     messages = messages.filter( i=> !!i.image_uri);

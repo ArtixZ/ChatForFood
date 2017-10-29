@@ -21,7 +21,7 @@ import { ImagePicker } from 'expo';
 
 // import Header from './Header';
 import { MessageBubble, ReversedList } from './common';
-import { sendMessage, getResponse, selectCameraImg, getRecommendation } from '../actions';
+import { sendMessage, getResponse, selectCameraImg, getRecommendation, respondTakenImg } from '../actions';
 
 const TITLE = 'ChatForFood';
 
@@ -52,6 +52,7 @@ class ChatUI extends Component {
     };
     this.sendMessage = this.sendMessage.bind(this);
     this.renderRow = this.renderRow.bind(this);
+    this.onChatResponse = this.onChatResponse.bind(this);
   }
 
   componentWillMount() {
@@ -85,6 +86,19 @@ class ChatUI extends Component {
     }
   };
 
+  onChatResponse(type) {
+    const { respondTakenImg } = this.props;
+
+    switch(type) {
+      case 'takeImage': {
+        respondTakenImg();
+        return
+      }
+      default: 
+        return
+    }
+  }
+
   renderRow(rowData) {
         const { msg_id, timeStamp, direction, body } = rowData.item;
         const { navigation } = this.props;
@@ -95,6 +109,7 @@ class ChatUI extends Component {
                 timestamp={timeStamp}
                 body={body}
                 navigation={navigation}
+                onResponse={this.onChatResponse}
             />
              
         ); 
@@ -230,6 +245,12 @@ const mapStateToProps = ({ messages }) => {
     return { messages };
 };
 
-export default connect(mapStateToProps, {sendMessage, getResponse, selectCameraImg, getRecommendation})(ChatUI);
+export default connect(mapStateToProps, {
+  sendMessage, 
+  getResponse, 
+  selectCameraImg, 
+  getRecommendation, 
+  respondTakenImg
+})(ChatUI);
 // export default connect(mapStateToProps, {sendMessage, getResponse})((ChatUI));
 

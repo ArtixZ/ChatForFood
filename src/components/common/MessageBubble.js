@@ -1,14 +1,18 @@
 import React  from 'react';
+import { View, Image } from 'react-native';
+import AnimatedEllipsis from 'react-native-animated-ellipsis';
+import { FileSystem } from 'expo';
+import { Text, Divider } from 'react-native-elements'
+
 import CardWrapper from '../wrappers/CardWrapper';
 import SwipeCard from '../wrappers/SwipeCard';
 import FoodClassCard from '../wrappers/FoodClassCard';
-import { Text, Divider } from 'react-native-elements'
-import { FileSystem } from 'expo';
+import FoodClassOptions from '../FoodClassOptions';
+import { respondTakenImg } from '../../actions/Camera';
 
+const MessageBubble = ({ outOrIn, timestamp, body, navigation, onResponse }) => {
 
-const MessageBubble = ({ outOrIn, timestamp, body, navigation }) => {
-
-    const { textStyle, dividerStyle } = styles;
+    const { textStyle, dividerStyle, takenImgSty } = styles;
     const { type } = body;
     const leftOrRight = outOrIn === 'outgoing' ? 'flex-end' : 'flex-start';
     switch (type) {
@@ -26,7 +30,7 @@ const MessageBubble = ({ outOrIn, timestamp, body, navigation }) => {
             const { payload } = body;
             return (
                 <SwipeCard
-                    cards = {payload}
+                    cards={payload}
                     navigation={navigation}
                 />
             );
@@ -43,12 +47,61 @@ const MessageBubble = ({ outOrIn, timestamp, body, navigation }) => {
                     picBase64 = {picBase64}
                     foodClass = {foodClass}
                 />)
+        case 'takenImg':
+            const { picURI: pic } = body.payload;
+            return (
+                <Image
+                    style={{ ...takenImgSty, alignSelf: leftOrRight }}
+                    source={{ uri: pic }}
+                />
+            )
+        case 'takenImgLoadingResponse':
+            return (
+                <View 
+                    style={{
+                        alignItems: 'center',
+                        backgroundColor: '#e2e2eb',
+                        borderRadius: 100,
+                        height: 50,
+                        margin: 20,
+                        overflow: 'hidden',
+                        width: 100,
+                    }}
+                >
+                    <AnimatedEllipsis 
+                        numberOfDots={3}
+                        minOpacity={0.4}
+                        animationDelay={200}
+                        style={{
+                            color: '#94939b',
+                            fontSize: 100,
+                            left: -10,
+                            letterSpacing: -15,
+                            textAlign: 'center',
+                            top: -65,
+                        }}
+                    />
+                </View>
+            )
+        case 'takenImgOptions':
+            const { options } = body.payload;
+            return (
+                <FoodClassOptions 
+                    options={options}
+                />
+            )
         default:
             console.log(type);
     }
 }
 
 const styles = {
+    takenImgSty: {
+        margin: 20,
+        width: 200,
+        height: 200,
+        resizeMode: 'cover',
+    },
     textStyle: {
         alignItems:'center',
         marginTop: 10,

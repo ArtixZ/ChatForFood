@@ -9,9 +9,9 @@ export default (state = INIT_STATE, action) => {
 
     switch(action.type) {
         case 'CAMERA_IMAGE_URI': 
-            return { ...state, uri: action.payload };
-        case 'CAMERA_IMAGE_FOOD_IMG':
-            return {...state, foodClass: action.payload};
+            return { ...state, takenImg: action.payload };
+        // case 'CAMERA_IMAGE_FOOD_IMG':
+        //     return {...state, foodClass: action.payload};
         default: 
             return state;
     }
