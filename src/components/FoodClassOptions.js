@@ -45,7 +45,10 @@ class FoodClassOptions extends Component {
         const {options} = this.props;
         return options.map( (opt, i) => {
             return (
-                <View>
+                <View style={styles.buttonContainer} key={i}>
+                    <Button>
+                        {opt.food_class}
+                    </Button>
                 </View>
             )
         })
@@ -55,7 +58,7 @@ class FoodClassOptions extends Component {
 
         return(
             <View style={styles.optionsContainer}>
-                {this.renderOptions}
+                {this.renderOptions()}
             </View>
         )
     }
@@ -63,6 +66,11 @@ class FoodClassOptions extends Component {
 
 const styles = {
     optionsContainer: {
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
+    buttonContainer: {
+        margin: 10,
     }
 }
 
