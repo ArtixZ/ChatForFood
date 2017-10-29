@@ -21,5 +21,6 @@ export const callAPI = async (method, {requestedType, url}, data) => {
         body: JSON.stringify(data)
     }).then(res => {
         return res.json()
-    })
+    }).catch(err =>
+         err)
 }
