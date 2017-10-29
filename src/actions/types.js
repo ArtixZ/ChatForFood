@@ -17,7 +17,7 @@ export const TAKEN_IMAGE = 'TAKEN_IMAGE';
 export const CAMERA_IMAGE_URI = 'CAMERA_IMAGE_URI';
 export const CAMERA_IMAGE_FOOD_IMG = 'CAMERA_IMAGE_FOOD_IMG';
 export const TAKEN_IMAGE_RESPONSE_LOADING = 'TAKEN_IMAGE_RESPONSE_LOADING';
-
+export const SELECT_OPTION = 'SELECT_OPTION';
 
 /*--------------- recommendation ---------------------*/
 

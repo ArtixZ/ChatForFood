@@ -6,7 +6,8 @@ import {
     GET_FOOD_DETAILS,
     TAKEN_IMAGE,
     TAKEN_IMAGE_RESPONSE_LOADING,
-    CAMERA_IMAGE_FOOD_IMG
+    CAMERA_IMAGE_FOOD_IMG,
+    SELECT_OPTION,
 } from '../actions/types';
 
 import {data, IMAGES} from './data';
@@ -154,6 +155,17 @@ export default (state = INIT_STATE, action) => {
             const takenPicOptions = generateTakenPicOptions(action.payload);
             state.pop();
             return [...state, takenPicOptions];
+        case SELECT_OPTION:
+            state.pop();
+            return [...state, {
+                msg_id: `temp_${generateGuuId()}`,
+                timeStamp: moment().toISOString(),
+                direction: 'outgoing',
+                body: {
+                    type: 'selectedImg',
+                    payload: action.payload
+                }
+            }]
         default: 
             return state;
     }

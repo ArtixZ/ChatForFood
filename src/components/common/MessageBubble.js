@@ -8,6 +8,7 @@ import CardWrapper from '../wrappers/CardWrapper';
 import SwipeCard from '../wrappers/SwipeCard';
 import FoodClassCard from '../wrappers/FoodClassCard';
 import FoodClassOptions from '../FoodClassOptions';
+import FoodClassOption from '../FoodClassOption';
 import { respondTakenImg } from '../../actions/Camera';
 
 const MessageBubble = ({ outOrIn, timestamp, body, navigation, onResponse }) => {
@@ -88,6 +89,12 @@ const MessageBubble = ({ outOrIn, timestamp, body, navigation, onResponse }) => 
             return (
                 <FoodClassOptions 
                     options={options}
+                />
+            )
+        case 'selectedImg':
+            return (
+                <FoodClassOption 
+                    option={body.payload}
                 />
             )
         default:

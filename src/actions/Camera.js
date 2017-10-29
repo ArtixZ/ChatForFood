@@ -2,6 +2,7 @@ import {
     CAMERA_IMAGE_URI,
     CAMERA_IMAGE_FOOD_IMG,
     TAKEN_IMAGE_RESPONSE_LOADING,
+    SELECT_OPTION,
  } from './types';
 
  import {
@@ -43,6 +44,15 @@ export const respondTakenImg = () => {
         .then(res => {
             dispatch(imgFoodClass(res[FOOD_CLASS_FROM_IMAGE.requestedType[0]]));
             // dispatch(sendFoodClass(image.uri, image.base64, res[FOOD_CLASS_FROM_IMAGE.requestedType[0]]));
+        })
+    }
+}
+
+export const selectImgOption = (option) => {
+    return(dispatch, getState) => {
+        dispatch({
+            type: SELECT_OPTION,
+            payload: option
         })
     }
 }

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
+import { connect } from 'react-redux';
+
 // import { CheckBox } from 'react-native-elements';
 import { Button } from './common';
+import { selectImgOption } from '../actions';
 
 class FoodClassOptions extends Component {
 
     constructor(props) {
         super(props);
-        props.options[0]['checked'] = true;
         this.state = {
             foodClasses: props.options,
         };
@@ -25,6 +27,9 @@ class FoodClassOptions extends Component {
         this.setState({foodClasses: [...foodClasses]});
     }
 
+    onBtnPress = (option) => {
+        this.props.selectImgOption(option);
+    }
 
     renderBtn = ({item, index: i}) => {
         return (
@@ -46,7 +51,7 @@ class FoodClassOptions extends Component {
         return options.map( (opt, i) => {
             return (
                 <View style={styles.buttonContainer} key={i}>
-                    <Button>
+                    <Button onPress={(i) => this.onBtnPress(opt)}>
                         {opt.food_class}
                     </Button>
                 </View>
@@ -74,4 +79,4 @@ const styles = {
     }
 }
 
-export default FoodClassOptions;
+export default connect(null, { selectImgOption })(FoodClassOptions);
