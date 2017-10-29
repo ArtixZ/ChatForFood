@@ -66,19 +66,19 @@ export default function PreloadHOC(WrappedComponent) {
             await Promise.all([
                 ...imageAssets,
             ]);
-            this.setState({ location, appIsReady: true });            
+            this.setState({ appIsReady: true });            
         }
 
-        _getLocationAsync = async () => {
-            let { status } = await Permissions.askAsync(Permissions.LOCATION);
-            if (status !== 'granted') {
-              this.setState({
-                errorMessage: 'Permission to access location was denied',
-              });
-            }
+        // _getLocationAsync = async () => {
+        //     let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        //     if (status !== 'granted') {
+        //       this.setState({
+        //         errorMessage: 'Permission to access location was denied',
+        //       });
+        //     }
         
-            let location = await Location.getCurrentPositionAsync({});
-          };
+        //     let location = await Location.getCurrentPositionAsync({});
+        //   };
 
         render() {
             if (!this.state.appIsReady) {
